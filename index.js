@@ -1,14 +1,16 @@
 require('dotenv').config();
+const cors = require('cors')
 require('express-async-errors');
 const express = require('express');
 const app = express();
 const connectdb = require('./db/connect');
 
 const authenticate = require('./middleware/authentication')
-const helmet = require('helmet')
-const cors = require('cors')
-const xss = require('xss-clean')
-const rate = require('express-rate-limit')
+const port = process.env.PORT || 3000;
+
+app.use(cors({
+  origin:`https://localhost:${port}`,
+}))
 
 
 //routers
@@ -32,7 +34,7 @@ app.use('/api/v1/job',authenticate,require('./routes/jobs'));
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 3000;
+
 
 const start = async () => {
   try {
