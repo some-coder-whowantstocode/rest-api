@@ -9,7 +9,7 @@ const authenticate = require('./middleware/authentication')
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-  origin:'https://brainy-blue-fox.cyclic.app/',
+  origin:`https://localhost:${port}`,
   methods:["GET","POST","PATCH","DELETE"]
 }))
 
